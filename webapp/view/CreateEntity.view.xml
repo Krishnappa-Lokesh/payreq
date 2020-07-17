@@ -1,0 +1,51 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:l="sap.ui.layout" xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m" controllerName="appay.AP_PayRequest.controller.CreateEntity">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" title="{viewModel>/viewTitle}" busy="{viewModel>/busy}">
+		<semantic:content>
+
+			<!-- Form Fragment Header --> 
+			<core:Fragment id="frgSharedPageHeader" fragmentName="appay.AP_PayRequest.view.SharedPageHeader" type="XML"/>
+
+			<!-- Details Section --> 
+			<IconTabBar id="iconTabBar" class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}">
+					    <content>
+							<!-- Form Fragment Items --> 
+							<core:Fragment id="frgSharedPageItems" fragmentName="appay.AP_PayRequest.view.SharedPageItems" type="XML"/>
+					    </content>
+					</IconTabFilter>
+		
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}">
+					    <content>
+							<!-- Form Fragment Attachments --> 
+							<core:Fragment id="frgSharedPageAttachment" fragmentName="appay.AP_PayRequest.view.SharedPageAttachment" type="XML"/>
+					    </content>
+					</IconTabFilter>
+					</items>
+			</IconTabBar>
+		</semantic:content>
+		
+		<semantic:saveAction>
+			<!-- <semantic:SaveAction id="save" enabled="{viewModel>/enableSave}" press="onSave"/> -->
+			<semantic:SaveAction id="save" enabled="{viewModel>/enableSave}" press="onSave"/>
+		</semantic:saveAction> 
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"/>
+		</semantic:cancelAction>
+		<semantic:customHeaderContent>
+			    <Button  id="buttonFullScreen" 
+			    		activeIcon="sap-icon://full-screen" 
+			    		icon="sap-icon://full-screen" 
+			    		press="hideMaster"/>
+		</semantic:customHeaderContent>
+	<semantic:positiveAction>
+	    <semantic:PositiveAction id="semButtonSubmit" enabled="{viewModel>/enableSave}" text="Submit" press="onSave"/>
+	</semantic:positiveAction>
+	<semantic:messagesIndicator>
+	    <semantic:MessagesIndicator id="indicator0" 
+	    							tooltip="Messages"
+									press="onMessagePopoverPress"	    							
+	    							/>
+	</semantic:messagesIndicator>
+	</semantic:DetailPage>
+</mvc:View>

@@ -1,0 +1,237 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:smart="sap.ui.comp.smartfield"
+	xmlns:form="sap.ui.comp.smartform" 
+	>
+
+	<ObjectHeader id="objectHeader" 
+				responsive="true"
+				title=" {Belnr}"
+				number="{
+						parts:[ {path:'Dmbtr'},{path:'i18n>dollorSymbol'}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {showMeasure: true }
+						}"
+				class="sapUiResponsivePadding--header" 			
+				>
+		<statuses>
+			<ObjectStatus
+				text="{ZdocStatus}" 
+				state= "{= ${ZdocStatus} !== 'SUBMITTED' ? 'Warning' : 'Success' }"
+				visible="{= ${Belnr} !== '9999999999' ?  true : false  }"/>
+		</statuses>
+		<ObjectAttribute title="Fiscal Year" text="{Gjahr}"/>
+	</ObjectHeader>
+
+
+	<form:SmartForm id="formGen"
+		 title="General Information" editable="{= ${appView>/mode} === 'edit' }" >
+				<form:layout>
+					<form:Layout columnsM="2" columnsL="2" columnsXL="2"  
+				    	labelSpanXL="12"
+						labelSpanL="12"
+						labelSpanM="12"
+						labelSpanS="12"/>
+				</form:layout>
+	
+	
+	<!--Catagory Code -->
+			<form:Group >
+				<form:GroupElement>
+					<smart:SmartField id="DescS_id" 
+								name="DescS_id" 
+								enabled="{= ${appView>/mode} === 'edit' &amp;&amp; ${appView>/costObjectDerived} !== true ?  true : false }" 
+								change="onCategoryChanged"
+								value="{DescS}"
+								initialise="onCategoryInitialised"
+								innerControlsCreated="onCategoryInnerControlCreated"
+								valueListChanged="onCategoryValueListChanged"
+								>
+
+                        <smart:configuration>
+                            <smart:Configuration preventInitialDataFetchInValueHelpDialog="false" id="DescS_VH_id" displayBehaviour="descriptionAndId" />
+                        </smart:configuration>
+                    </smart:SmartField>
+				</form:GroupElement>
+			</form:Group>
+
+<!--Posting Date -->
+			<form:Group >
+				<form:GroupElement>
+					<smart:SmartField id="Budat_ids" 
+								name="Budat_ids" 
+								enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+								visible="{= ${appView>/mode} === 'edit'? true : true }"
+								value="{ path: 'Budat', 
+										type: 'sap.ui.model.type.Date',
+										formatOptions: { UTC: true, format: 'yMd' } }"						
+								>
+					<smart:configuration>
+	                	<smart:Configuration controlType="input"  displayBehaviour="descriptionAndId" />
+	                </smart:configuration>
+	                </smart:SmartField>
+				</form:GroupElement>
+			</form:Group>
+		</form:SmartForm>
+		
+		<!---->
+		
+	<form:SmartForm id="formVen"
+		 title="Vendor Information" editable="{= ${appView>/mode} === 'edit'}">
+			<form:layout>
+				<form:Layout columnsM="2" columnsL="2" columnsXL="2"  
+				    labelSpanXL="12"
+					labelSpanL="12"
+					labelSpanM="12"
+					labelSpanS="12"/>
+			</form:layout>
+			
+<!--Vendor Number or Name -->
+			<form:Group>
+				<form:GroupElement >
+					<smart:SmartField id="Lifnr_id" 
+									name="Lifnr_id"  
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									value="{Lifnr}" 
+									change="onVendorChanged"
+									valueListChanged="onVendorValueListChanged"
+									>
+					<smart:configuration>
+	                	<smart:Configuration controlType="input"  displayBehaviour="descriptionAndId" />
+	                </smart:configuration>
+	                </smart:SmartField>
+				</form:GroupElement>
+				
+<!---->
+<!--Blank Line / Space -->
+				<form:GroupElement >
+
+				<smart:SmartField>
+					
+				</smart:SmartField>
+
+				</form:GroupElement>
+
+<!---->
+<!--Vendor Invoice Date -->
+				<form:GroupElement >
+					<smart:SmartField id="Bldat_ids" 
+								name="Bldat_ids" 
+								enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+								visible="{= ${appView>/mode} === 'edit'? true : true}"
+								initialise="onBldatInitialised"
+								innerControlsCreated="onBldatInnerControlCreated"
+								value="{ path: 'Bldat', 
+										 type: 'sap.ui.model.type.Date', 
+										 formatOptions: { UTC: true, format: 'yMd' } 
+										  }"								
+										  >
+						<smart:configuration>
+	                		<smart:Configuration controlType="input"  displayBehaviour="descriptionAndId" />
+	                	</smart:configuration>
+	                </smart:SmartField>
+				</form:GroupElement>
+			</form:Group>
+			
+<!--Vendor Address-->
+			<form:Group label="Name and Address"  >
+				<form:GroupElement>
+						<smart:SmartField id="idLine0" value="{AddressD/Line0}" enabled="false" showLabel="false"/>
+				</form:GroupElement>
+	            <form:GroupElement>
+						<smart:SmartField id="idLine1" value="{AddressD/Line1}" showLabel="false"/>
+				</form:GroupElement>
+	     		<form:GroupElement>
+						<smart:SmartField id="idLine2" value="{AddressD/Line2}" showLabel="false"/>
+				</form:GroupElement>
+				<form:GroupElement>
+						<smart:SmartField id="idLine3" value="{AddressD/Line3}" showLabel="false"/>
+				</form:GroupElement>
+				<form:GroupElement>
+						<smart:SmartField id="idLine4" value="{AddressD/Line4}" showLabel="false"/>
+				</form:GroupElement>
+			</form:Group>
+		</form:SmartForm>
+		
+		
+		<!---->
+		
+		<form:SmartForm id="formPay"
+		 title="Payment Information" editable="{= ${appView>/mode} === 'edit' }">
+				<form:layout>
+				<form:Layout columnsM="2" columnsL="2" columnsXL="2"  
+				    labelSpanXL="12"
+					labelSpanL="12"
+					labelSpanM="12"
+					labelSpanS="12"/>
+			</form:layout>
+			
+<!--Vendor Reference Number-->
+			<form:Group>
+				<form:GroupElement >
+				<smart:SmartField id="Xblnr_id"
+									name="Xblnr_id"
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									change="_validateSaveEnablement"
+									value="{Xblnr}"
+									>
+				<smart:configuration>
+	                <smart:Configuration controlType="input"  displayBehaviour="descriptionAndId" />
+	            </smart:configuration>
+	            </smart:SmartField>
+			</form:GroupElement>
+			</form:Group>
+			
+<!--Header Amount-->
+			<form:Group>
+				<form:GroupElement >
+					<smart:SmartField id="Dmbtr_id" 
+								name="Dmbtr_id" 
+								enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+								value="{ path:'Dmbtr', type: 'sap.ui.model.type.Currency'  }"
+								uomVisible="false"
+								change="_validateSaveEnablement"
+								textAlign="Right"
+								>
+					<smart:configuration>
+	                	<smart:Configuration displayBehaviour="descriptionAndId"  controlType="input"/>
+	            	</smart:configuration>
+	        		</smart:SmartField>
+				</form:GroupElement>
+			</form:Group>
+			
+<!--Header Notes-->
+			<form:Group>
+				<form:GroupElement >
+					<smart:SmartField id="Sgtxt_id" 
+									name="Sgtxt_id"	
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									change="_validateSaveEnablement"
+									value="{Sgtxt}"
+									>
+						<smart:configuration>
+	                		<smart:Configuration controlType="input"  displayBehaviour="descriptionAndId" />
+	            		</smart:configuration>
+	            	</smart:SmartField>
+				</form:GroupElement>
+			</form:Group>	
+			
+<!--To be printed on Check   -->
+	        <form:Group>
+	            <form:GroupElement>
+					<smart:SmartField id="SgtxtCb_id" 
+									name="SgtxtCb_id"	
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									change="_validateSaveEnablement"
+									value="{SgtxtCb}" />
+				</form:GroupElement>
+			</form:Group>
+
+		
+		</form:SmartForm>
+</core:FragmentDefinition>

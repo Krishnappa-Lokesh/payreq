@@ -1,0 +1,114 @@
+<mvc:View 
+	controllerName="appay.AP_PayRequest.controller.Master" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:core="sap.ui.core" 
+	xmlns="sap.m" 
+	xmlns:semantic="sap.m.semantic">
+	
+	<semantic:MasterPage id="page" 
+						title="{masterView>/title}" 
+						navButtonPress="onNavBack" 
+						showNavButton="true" >
+		<semantic:subHeader>
+			<Bar id="headerBar">
+				<contentMiddle>
+					<SearchField id="searchField" 
+								showRefreshButton="{= !${device>/support/touch} }" 
+								tooltip="{i18n>masterSearchTooltip}" 
+								width="100%" 
+								search="onSearch"/>
+				</contentMiddle>
+			</Bar>
+		</semantic:subHeader>
+		<semantic:content>
+			<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>
+			
+			<!--  Filter Bar -->
+			<!-- 			        				
+									count="{appView>/totalRecords}" 
+			        				count="{appView>/savedRecords}" 
+			        			    count="{appView>/submittedRecords}" 
+			        			    count="{appView>/RejectedRecords}" 
+			-->
+			<IconTabBar id="masterFilterBar"
+						select="handleIconTabBarSelect"
+						class="sapUiResponsiveContentPadding"
+						>
+			    <items>
+
+					<!--  All Records -->
+			        <IconTabFilter text="All" 
+			        				icon="sap-icon://task" 
+			        				iconColor="Default" 
+			        				id="masterDocsfilterAll"
+			        				key="All">
+			            <content>
+							<!-- Master List all Items --> 
+							<core:Fragment id="frgSharedMasterListAll" 
+										fragmentName="appay.AP_PayRequest.view.SharedMasterList" 
+										type="XML"/>
+			            </content>
+			        </IconTabFilter>
+
+					<!--  Rejected Records -->
+			        <IconTabFilter text="Rejected" 
+			        			icon="sap-icon://cancel" 
+			        			iconColor="Negative" 
+			        			id="masterDocsfilterRejected"
+			        			key="Rejected">
+			            <content>
+							<!-- Master List Submitted Items --> 
+							<core:Fragment id="frgSharedMasterListRejected" 
+										fragmentName="appay.AP_PayRequest.view.SharedMasterList" 
+										type="XML"/>
+			            </content>
+					</IconTabFilter>
+
+		
+					<!--  Saved Records -->
+			        <IconTabFilter text="Saved" 
+			        				icon="sap-icon://save" 
+			        				iconColor="Critical" 
+			        				id="masterDocsfilterSaved"
+			        				key="Saved">
+			            <content>
+							<!-- Master List Saved Items --> 
+							<core:Fragment id="frgSharedMasterListSaved" 
+										fragmentName="appay.AP_PayRequest.view.SharedMasterList" 
+										type="XML"/>
+			            </content>
+					</IconTabFilter>
+
+					<!--  Submitted Records -->
+			        <IconTabFilter text="Submitted" 
+			        			icon="sap-icon://accept" 
+			        			iconColor="Positive" 
+			        			id="masterDocsfilterSubmitted"
+			        			key="Submitted">
+			            <content>
+							<!-- Master List Submitted Items --> 
+							<core:Fragment id="frgSharedMasterListSubmitted" 
+										fragmentName="appay.AP_PayRequest.view.SharedMasterList" 
+										type="XML"/>
+			            </content>
+					</IconTabFilter>
+
+
+				</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:addAction>
+			<semantic:AddAction id="addButton" enabled="{appView>/addEnabled}" press="onAdd"/>
+		</semantic:addAction>
+		
+		<!--<semantic:positiveAction>-->
+		<!--	<semantic:PositiveAction id="Add"   text="Create New Document" enabled="{appView>/addEnabled}" press="onAdd" />-->
+		<!--</semantic:positiveAction>-->
+		
+		<!--<semantic:customFooterContent>-->
+		<!--	<Button text="Create New Document" enabled="{appView>/addEnabled}" press="onAdd" icon="sap-icon://add" activeIcon="sap-icon://add" />-->
+		<!--</semantic:customFooterContent>-->
+
+
+	</semantic:MasterPage>
+</mvc:View>

@@ -1,0 +1,239 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:smart="sap.ui.comp.smartfield"
+	xmlns:form="sap.ui.comp.smartform" 
+	>
+
+	<ObjectHeader id="objectHeader" 
+				responsive="true"
+				title=" {Belnr}"
+				number="{
+						parts:[ {path:'Dmbtr'},{path:'i18n>dollorSymbol'}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {showMeasure: true }
+						}"
+				class="sapUiResponsivePadding--header" 			
+				>
+		<statuses>
+			<ObjectStatus
+				text="{ZdocStatus}" 
+				state= "{= ${ZdocStatus} !== 'SUBMITTED' ? 'Warning' : 'Success' }"
+				visible="{= ${Belnr} !== '9999999999' ?  true : false  }"/>
+		</statuses>
+		<ObjectAttribute title="Year" text="{Gjahr}"/>
+	</ObjectHeader>
+
+
+	<Panel width="auto" class="sapUiResponsiveMargin">
+		<content>
+
+			<f:SimpleForm class="editableForm"
+					editable="{= ${appView>/mode} === 'edit'? true : false }"  
+					id="newEntitySimpleForm" 
+					layout="ResponsiveGridLayout" 
+					maxContainerCols="2" 
+					minWidth="1024" 
+					labelSpanXL="4"
+					labelSpanL="4"
+					labelSpanM="12"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="0"
+					emptySpanL="0"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="2"
+					columnsM="2"
+					singleContainerFullSize="false"
+			>
+				<f:content>
+					
+					<!--///////// Top Left Column -->
+					<core:Title text="General Info" level="H4" emphasized="true" />
+
+					<!--
+					<smart:SmartLabel labelFor="Rstgr_id"/>
+					<smart:SmartField id="Rstgr_id" 
+								visible="false" 
+								value="{Rstgr}"/>
+					-->
+					<smart:SmartLabel labelFor="DescS_id"/>
+					<smart:SmartField id="DescS_id" 
+								name="DescS_id" 
+								enabled="{= ${appView>/mode} === 'edit' &amp;&amp; ${appView>/costObjectDerived} !== true ?  true : false }" 
+								change="onCategoryChanged"
+								value="{DescS}"
+								initialise="onCategoryInitialised"
+								innerControlsCreated="onCategoryInnerControlCreated"
+								valueListChanged="onCategoryValueListChanged"
+								>
+
+                        <smart:configuration>
+                            <smart:Configuration preventInitialDataFetchInValueHelpDialog="false" id="DescS_VH_id"/>
+                        </smart:configuration>
+                    </smart:SmartField>
+
+					<smart:SmartLabel labelFor="Budat_ids"/>
+					<smart:SmartField id="Budat_ids" 
+								name="Budat_ids" 
+								enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+								visible="{= ${appView>/mode} === 'edit'? true : true }"
+								value="{ path: 'Budat', 
+										type: 'sap.ui.model.type.Date',
+										formatOptions: { UTC: true, format: 'yMd' } }"						
+								/>
+					
+		
+					<!--///////// Top Right Column -->
+					<core:Title text="" level="H4" emphasized="true"/>
+		
+
+
+					
+					<!--//////// Bottom Left Column  --> 
+					<core:Title text="Vendor Details" level="H4" emphasized="true"/>
+					
+					<!-- app:multiLineSettings="{cols: 50, rows: 4}"  -->
+					
+					<smart:SmartLabel labelFor="Lifnr_id"/>
+					<smart:SmartField id="Lifnr_id" 
+									name="Lifnr_id"  
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									value="{Lifnr}" 
+									change="onVendorChanged"
+									valueListChanged="onVendorValueListChanged"
+									/>
+
+									
+					<!--<smart:SmartLabel labelFor="Name1_id"/>-->
+					<!--<smart:SmartField id="Name1_id" enabled="false" value="{Name1}" />-->
+					<!--<smart:SmartLabel labelFor="Address_id"/>-->
+					<!--<smart:SmartField id="Address_id" enabled="false" -->
+					<!--				value="{AddressD/Line0} {AddressD/Line1} /n-->
+					<!--						{AddressD/Line2} {AddressD/Line3}	/n-->
+					<!--						{AddressD/Line4} /n-->
+					<!--						{AddressD/Telf1}-->
+					<!--						" />-->
+
+	
+					<core:Title text="Vendor Address" level="H4" emphasized="true"/>
+					
+					<VBox class="sapUiSmallMargin" fitContainer="true" height="100%" width="100%" justifyContent="Start" displayInline="true"
+					id="leftVBox" alignContent="Start"  >
+
+						<smart:SmartField id="idLine0" value="{AddressD/Line0}" textAlign="Left" textLabel="" />
+						<smart:SmartField id="idLine1" value="{AddressD/Line1}" textAlign="Left" showLabel="false" />
+						<smart:SmartField id="idLine2" value="{AddressD/Line2}"/>
+						<smart:SmartField id="idLine3" value="{AddressD/Line3}"/>
+						<smart:SmartField id="idLine4" value="{AddressD/Line4}"/>
+					</VBox>
+					<!--<smart:SmartField id="idProductId1" value="{AddressD/Line1}"/>-->
+					<!--<smart:SmartField id="idProductId2" value="{AddressD/Line2}"/>-->
+					<!--<smart:SmartField id="idProductId3" value="{AddressD/Line3}"/>-->
+					
+					
+		<!--<form:SmartForm id="Address_id" class="editableForm" editTogglable="true" editable="true">-->
+		<!--	<form:Group id="G1" label="Vendor Address">-->
+
+				 <!--********************************** -->
+				 <!--sap:updatable="false"				-->
+				 <!--********************************** -->
+
+		<!--		<form:GroupElement id="Address_Disp">-->
+
+		<!--			<smart:SmartField id="idProductId0" value="{AddressD/Line0}"/>-->
+		<!--			<smart:SmartField id="idProductId1" value="{AddressD/Line1}"/>-->
+		<!--			<smart:SmartField id="idProductId2" value="{AddressD/Line2}"/>-->
+		<!--			<smart:SmartField id="idProductId3" value="{AddressD/Line3}"/>-->
+		<!--		</form:GroupElement>-->
+				
+		<!--	</form:Group>-->
+		<!--</form:SmartForm>-->
+				
+					
+				<!--
+				<VBox class="sapUiSmallMargin" fitContainer="true" height="100%" width="100%" justifyContent="Start" displayInline="true" 
+					id="leftVBox" alignContent="Start">
+					<items>
+					<f:SimpleForm xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" 
+    				editable="false" id="vendorAddress" columnsL="1" columnsXL="1" labelSpanL="5"
+    				title="Vendor Address" labelSpanM="5" cd:w5g.dt.context="{/ET_AddressSet}" layout="ResponsiveGridLayout" singleContainerFullSize="true">	
+					<Text text="{Line0}" id="__text32"/>
+		            <Text text="{Line1}" id="__text33" wrapping="false" class="sizeText"/>
+		            <Text text="{Line2}" id="__text39" wrapping="false" class="sizeText"/>
+		            <Text text="{Line3}" id="text5"/>
+		            <Text text="{Line4}" id="text6"/>
+		            <Text text="{Telf1}" id="text8"/>
+		    		<f:customData>
+        			<core:CustomData key="w5g.dt.editable" value="false" id="data2"/>
+    				</f:customData>
+    				</f:SimpleForm>
+					</items>
+				</VBox>
+				-->
+		
+		
+					<!--///////// Bottom Right Column -->
+					<core:Title text="Payment Information" level="H4" emphasized="true"/>
+		
+					<smart:SmartLabel labelFor="Bldat_ids"/>
+					<smart:SmartField id="Bldat_ids" 
+								name="Bldat_ids" 
+								enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+								visible="{= ${appView>/mode} === 'edit'? true : true}"
+								initialise="onBldatInitialised"
+								innerControlsCreated="onBldatInnerControlCreated"
+								value="{ path: 'Bldat', 
+										 type: 'sap.ui.model.type.Date', 
+										 formatOptions: { UTC: true, format: 'yMd' } 
+										  }"/>
+
+					<smart:SmartLabel labelFor="Xblnr_id"/>
+					<smart:SmartField id="Xblnr_id"
+									name="Xblnr_id"
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									change="_validateSaveEnablement"
+									value="{Xblnr}"/>
+
+
+		
+					<smart:SmartLabel labelFor="Dmbtr_id"/>
+					<smart:SmartField id="Dmbtr_id" 
+								name="Dmbtr_id" 
+								enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+								value="{ path:'Dmbtr', type: 'sap.ui.model.type.Currency'  }"
+								uomVisible="false"
+								change="_validateSaveEnablement"
+								textAlign="Right"
+								/>
+
+
+					<!--///////// Bottom Left Column for Notes -->
+					<core:Title text="Notes" level="H4" emphasized="true" />
+		
+					<smart:SmartLabel labelFor="Sgtxt_id"/>
+					<smart:SmartField id="Sgtxt_id" 
+									name="Sgtxt_id"	
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									change="_validateSaveEnablement"
+									value="{Sgtxt}"/>
+
+					<smart:SmartLabel labelFor="SgtxtCb_id"/>
+					<smart:SmartField id="SgtxtCb_id" 
+									name="SgtxtCb_id"	
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									change="_validateSaveEnablement"
+									value="{SgtxtCb}"/>
+
+		
+				</f:content>
+			</f:SimpleForm>
+		</content>
+	</Panel>
+</core:FragmentDefinition>

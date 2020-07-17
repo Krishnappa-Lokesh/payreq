@@ -1,0 +1,146 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.m.semantic"
+    xmlns:footerbar="sap.ushell.ui.footerbar"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:smart="sap.ui.comp.smartfield">
+    <Table id="lineItemsList" width="auto" 
+            items="{to_item}" 
+            updateFinished="onListUpdateFinished" 
+            noDataText="{i18n>detailLineItemTableNoDataText}" 
+            busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+        <headerToolbar>
+            <OverflowToolbar id="lineItemsToolbar">
+                <Title id="lineItemsHeader" 
+                	text="{i18n>lineItemListHeader}{ path: 'appView>/unAllocatedLineItemTotal', type: 'sap.ui.model.type.Currency' }" 
+                	visible="={ $(appView>/unAllocatedLineItemTotal) === 0 ? false : true }"
+                	titleStyle="Auto"/>
+                <ToolbarSpacer/>
+                <Button id="lineItemAddButton" 
+                icon="sap-icon://add" 
+                text="Add Line"
+                press="onItemAddPress" 
+                enabled="{= ${appView>/itemAddButtonEnabled} === true ?  true : false}"/>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column visible="false">
+                <Text text="{/#ET_FV60Item/Bzkey/@sap:label}"/>
+            </Column>
+            <Column>
+                <Text text="{/#ET_FV60Item/CoTypDesc/@sap:label}"/>
+            </Column>
+            <Column>
+                <Text text="{/#ET_FV60Item/CostObj/@sap:label}"/>
+            </Column>
+            <Column>
+                <Text text="{/#ET_FV60Item/Geber/@sap:label}"/>
+            </Column>
+            <Column>
+                <Text text="{/#ET_FV60Item/Saknr/@sap:label}"/>
+            </Column>
+            <Column minScreenWidth="Tablet" hAlign="Right">
+                <Text text="{/#ET_FV60Item/Dmbtr/@sap:label}"/>
+            </Column>
+            <Column minScreenWidth="Tablet">
+                <Text text="{/#ET_FV60Item/Sgtxt/@sap:label}"/>
+            </Column>
+            <Column width="10px">
+                <Text text=""/>
+            </Column>
+            <Column visible="false">
+                <Text text="{/#ET_FV60Item/Rstgr/@sap:label}"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{Bzkey}"/>
+                </cells>
+                <cells>
+                	<!-- Cost object type -->
+                    <smart:SmartField id="CoTypDesc_id" 
+                    				name="CoTypDesc_id"
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									change="onItemCostObjTypChange"
+									value="{CoTypDesc}"/>
+                </cells>
+                <cells>
+                	<!-- Cost object  -->
+                    <smart:SmartField id="CostObj_id" 
+                    			name="CostObj_id" 
+								enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+								change="onItemCostObjChange" 
+								valueListChanged="onItemCostObjValueListChanged" value="{CostObj}">
+                        <smart:configuration>
+                            <smart:Configuration preventInitialDataFetchInValueHelpDialog="false" id="CostObj_VH_id"/>
+                        </smart:configuration>
+                    </smart:SmartField>
+
+                </cells>
+                <cells>
+                	<!-- Fund -->
+                    <smart:SmartField id="Geber_id"
+                    		name="Geber_id"	
+							enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+							change="_validateSaveEnablement" value="{Geber}"/>
+                </cells>
+                <cells>
+                	<!-- GL Account -->
+                    <smart:SmartField id="Saknr_id"
+                    		name="Saknr_id"
+							enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+							change="onItemGlAccountChange" 
+							initialise="onItemGlAccountInitialised" 
+							innerControlsCreated="onItemGlAccountInnerControlCreated" 
+							valueListChanged="onItemGlAccountValueListChanged" 
+							value="{Saknr}" >
+                        <smart:configuration>
+                            <smart:Configuration preventInitialDataFetchInValueHelpDialog="false" id="Saknr_VH_id"/>
+                        </smart:configuration>
+                    </smart:SmartField>
+                    <!-- 
+					<l:VerticalLayout ><Text  id="Saknr_text_id" 
+								text="{Saknr}"
+								/></l:VerticalLayout>
+					-->
+                </cells>
+                <cells>
+                	<!-- Amount -->
+                    <smart:SmartField id="Dmbtr_item_id"
+                    				name="Dmbtr_item_id"
+									enabled="{= ${appView>/mode} === 'edit'?  true : false}" 
+									value="{ path:'Dmbtr', type: 'sap.ui.model.type.Currency' }" 
+									uomVisible="false" change="_itemsValidateSaveEnablement" textAlign="Right"/>
+                </cells>
+                <cells>
+                	<!-- Item Text -->
+                    <smart:SmartField id="Sgtxt_item_id"
+                    				name="Sgtxt_item_id"
+                    				enabled="{= ${appView>/mode} === 'edit'?  true : false}" value="{Sgtxt}"/>
+                </cells>
+                <cells>
+                	<!-- Delete Button -->
+                    <Button id="Items_delete_btn_id" 
+                    		icon="sap-icon://sys-cancel" 
+                    		iconDensityAware="true"
+                    		type="Transparent" 
+                    		press="onItemDeletePress" 
+                    		enabled="{= ${appView>/mode} === 'edit'  &amp;&amp;  ${Belnr} === '9999999999' ?  true : false}" 
+                    		visible="false"         
+                    		tooltip="Delete"
+                    		/>
+<!--// visible="{= ${appView>/mode} === 'edit'  &amp;&amp;  ${Belnr} === '9999999999' ?  true : false}"-->
+                </cells>
+
+                <cells>
+					<!-- Item level Category code  : Hidden  -->
+                    <smart:SmartField id="Rstgr_item_id" visible="false" value="{Rstgr}"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</core:FragmentDefinition>

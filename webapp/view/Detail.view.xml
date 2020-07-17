@@ -1,0 +1,66 @@
+<mvc:View 
+	controllerName="appay.AP_PayRequest.controller.Detail" 
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:smart="sap.ui.comp.smartfield"
+	>
+	<semantic:DetailPage 
+		id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+
+			<!-- Form Fragment Header --> 
+			<core:Fragment id="frgSharedPageHeader" fragmentName="appay.AP_PayRequest.view.SharedPageHeader" type="XML"/>
+
+			<!-- Details Section --> 
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}">
+					    <content>
+							<!-- Form Fragment Items --> 
+							<core:Fragment id="frgSharedPageItems" fragmentName="appay.AP_PayRequest.view.SharedPageItems" type="XML"/>
+					    </content>
+					</IconTabFilter>
+		
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}">
+					    <content>
+							<!-- Form Fragment Attachments --> 
+							<core:Fragment id="frgSharedPageAttachment" fragmentName="appay.AP_PayRequest.view.SharedPageAttachment" type="XML"/>
+					    </content>
+					</IconTabFilter>
+					</items>
+			</IconTabBar>
+
+		</semantic:content>
+		<semantic:editAction>
+			<semantic:EditAction id="edit" press="onEdit"/>
+		</semantic:editAction>
+		<semantic:customFooterContent>
+			<Button enabled="true" id="deleteButton" press="onDelete" text="Delete" 
+				visible="{= ${Belnr} === '9999999999' ?  true : false  }"/>
+		</semantic:customFooterContent>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+		<semantic:customHeaderContent>
+<!--
+			    <footerbar:AddBookmarkButton text="Bookmark" icon="sap-icon://add-favorite" id="button0"/>
+-->
+			    <Button xmlns="sap.m" id="buttonFullScreen" activeIcon="sap-icon://full-screen" 
+			    		icon="sap-icon://full-screen" press="hideMaster"/>
+		</semantic:customHeaderContent>
+
+	</semantic:DetailPage>
+</mvc:View>
+
+

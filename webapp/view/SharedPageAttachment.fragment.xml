@@ -1,0 +1,97 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:smart="sap.ui.comp.smartfield"
+	>
+
+
+    <UploadCollection 
+        id="uploadCollection"
+        noDataText="No Attachments found." 
+        noDataDescription="Drop PDF file to upload, or use the &quot;+&quot; button." 
+		maximumFilenameLength="{attachSettings>/maximumFilenameLength}"
+		maximumFileSize="{attachSettings>/maximumFileSize}"
+		multiple="true"
+		instantUpload="true"
+		change="onChange"
+		fileDeleted="onFileDeleted"
+		filenameLengthExceed="onFilenameLengthExceed"
+		fileRenamed="onFileRenamed"
+		fileSizeExceed="onFileSizeExceed"
+		fileType="{fileTypes>/selected}"
+		selectionChange="onSelectionChange"
+		typeMissmatch="onTypeMissmatch"
+		uploadComplete="onUploadComplete"
+		beforeUploadStarts="onBeforeUploadStarts"
+		uploadTerminated="onUploadTerminated"
+        items="{
+	        path: 'to_attach',
+	        templateSharable: false
+        }"
+		numberOfAttachmentsText="Uploaded (8)"
+		showSeparators="{attachSettings>/showSeparators}"
+		uploadEnabled="{attachSettings>/uploadEnabled}"
+		uploadButtonInvisible="{= ${appView>/mode} === 'edit' ? false : true }"
+		mode="{attachSettings>/mode}"
+        >
+         
+		<toolbar>
+			<OverflowToolbar id="myId">
+				<Title id="attachmentTitle" />
+				<ToolbarSpacer />
+				<!--
+				<SearchField width="10rem" search="onSearch" />
+				
+				-->
+				<Button
+					id="downloadButton"
+					text="Download"
+					press="onDownloadItem"
+					enabled="false"
+					visible="false"
+					type="Transparent" />
+				<Button
+					id="deleteSelectedButton"
+					text="Delete"
+					press="onDeleteSelectedItems"
+					enabled="false"
+					visible="false"
+					type="Transparent" />
+				<ToggleButton
+					id="selectAllButton"
+					text="Select all"
+					press="onSelectAllPress"
+					enabled="false"
+					visible="false"
+					type="Transparent" />
+				<UploadCollectionToolbarPlaceholder />
+			</OverflowToolbar>
+		</toolbar>					         
+
+         
+        <items>
+            <UploadCollectionItem 
+				documentId="{ArcDocId}"
+				fileName="{Filename}"
+				mimeType="{MimeType}"
+				thumbnailUrl=""
+				url="{__metadata/media_src}"
+				selected="{selected}"					                	
+				enableEdit="false"
+				enableDelete="{= ${appView>/mode} === 'edit'  ? true : false }"
+				visibleDelete="false"
+				visibleEdit="false"
+				> 
+				
+				<!--visibleDelete="{= ${appView>/mode} === 'edit'? true : false }"	-->
+            </UploadCollectionItem> 
+        </items>
+    </UploadCollection>
+
+
+
+</core:FragmentDefinition>

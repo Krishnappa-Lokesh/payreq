@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+   <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='ECCSYSTEM')/$value">
+      <edmx:Include Namespace="Org.OData.Validation.V1" />
+   </edmx:Reference>
+   <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='ECCSYSTEM')/$value">
+      <edmx:Include Namespace="Org.OData.Core.V1" />
+   </edmx:Reference>
+   <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='ECCSYSTEM')/$value">
+      <edmx:Include Namespace="Org.OData.Aggregation.V1" />
+   </edmx:Reference>
+   <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='ECCSYSTEM')/$value">
+      <edmx:Include Namespace="com.sap.vocabularies.Common.v1" />
+   </edmx:Reference>
+   <edmx:Reference Uri="../../../sap/zfap_pay_req_srv/$metadata">
+      <edmx:Include Namespace="ZFAP_PAY_REQ_SRV" />
+   </edmx:Reference>
+   <edmx:DataServices>
+      <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="zfap_pay_annotation_anno_mdl.v1">
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.DerivedDefaultValue" String="" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.DerivedFilterDefaultValue" String="" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.FieldControl" EnumMember="com.sap.vocabularies.Common.v1.FieldControlType/" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.FilterDefaultValue" Path="" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarDate" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarHalfyear" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarMonth" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarQuarter" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarWeek" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarYear" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarYearHalfyear" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarYearMonth" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarYearQuarter" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsCalendarYearWeek" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsDayOfCalendarMonth" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsDayOfCalendarYear" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsDigitSequence" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsFiscalPeriod" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsFiscalYear" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsFiscalYearPeriod" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsFiscalYearVariant" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.IsUpperCase" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.Masked" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.MaxOccurs" Int="0" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.MinOccurs" Int="0" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.RelatedRecursiveHierarchy" AnnotationPath="" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.SemanticObject" String="" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.Text" String="" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.TextFormat" EnumMember="com.sap.vocabularies.Common.v1.TextFormatType/" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.ValueListWithFixedValues" Bool="false" />
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.Attributes">
+               <Collection />
+            </Annotation>
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.ValueListReferences">
+               <Collection>
+                  <String>VH_GLAccount</String>
+               </Collection>
+            </Annotation>
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+               <Record Type="com.sap.vocabularies.Common.v1.ValueListType">
+                  <PropertyValue Property="Label" String="G/L Account" />
+                  <PropertyValue Property="CollectionPath" String="VH_GLAccount" />
+                  <PropertyValue Property="CollectionRoot" String="" />
+                  <PropertyValue Property="SearchSupported" Bool="false" />
+                  <PropertyValue Property="Parameters">
+                     <Collection />
+                  </PropertyValue>
+               </Record>
+            </Annotation>
+         </Annotations>
+         <Annotations Target="ZFAP_PAY_REQ_SRV.ET_FV60Item/Saknr">
+            <Annotation Term="com.sap.vocabularies.Common.v1.ValueListMapping">
+               <Record Type="com.sap.vocabularies.Common.v1.ValueListMappingType">
+                  <PropertyValue Property="Label" String="" />
+                  <PropertyValue Property="CollectionPath" String="" />
+                  <PropertyValue Property="Parameters">
+                     <Collection />
+                  </PropertyValue>
+               </Record>
+            </Annotation>
+         </Annotations>
+      </Schema>
+   </edmx:DataServices>
+</edmx:Edmx>
+
